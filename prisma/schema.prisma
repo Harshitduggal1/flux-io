@@ -1,0 +1,170 @@
+// prisma/schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model User {
+  id           String        @id @default(cuid())
+  email        String        @unique
+  firstName    String
+  lastName     String
+  profileImage String?
+  customerId   String?       @unique
+  createdAt    DateTime      @default(now())
+  sites        Site[]
+  posts        Post[]
+  subscription Subscription?
+  comments     Comment[]
+  likes        Like[]
+  reactions    Reaction[]
+  // Additional fields
+  username     String?       @unique
+  bio          String?
+  location     String?
+  website      String?
+  birthDate    DateTime?
+  role         String?       @default("user")
+  lastLogin    DateTime?
+}
+
+model Site {
+  id           String   @id @default(uuid())
+  name         String
+  description  String
+  subdirectory String   @unique
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  imageUrl     String?
+  userId       String?
+  user         User?    @relation(fields: [userId], references: [id])
+  posts        Post[]
+  // Additional fields
+  theme        String?
+  isPublic     Boolean  @default(true)
+  customDomain String?  @unique
+}
+
+model Post {
+  id               String   @id @default(uuid())
+  title            String
+  articleContent   Json     // Changed from String to Json
+  smallDescription String
+  image            String
+  slug             String
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt // Changed from @default(now())
+  userId           String   // Changed from String? to String
+  user             User     @relation(fields: [userId], references: [id])
+  siteId           String   // Changed from String? to String
+  site             Site     @relation(fields: [siteId], references: [id], onDelete: Cascade)
+  likes            Int        @default(0)
+  views            Int        @default(0)
+  comments         Comment[]
+  postLikes        Like[]
+  reactions        Reaction[]
+  // Additional fields
+  status           String     @default("draft")
+  publishedAt      DateTime?
+  tags             String[]
+  metaDescription  String?
+  featuredImage    String?
+
+  @@unique([siteId, slug])
+}
+
+model Subscription {
+  id                   String   @id @default(uuid())
+  stripeSubscriptionId String   @unique
+  interval             String
+  status               String
+  planId               String
+  currentPeriodStart   Int
+  currentPeriodEnd     Int
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+  userId               String   @unique
+  user                 User     @relation(fields: [userId], references: [id])
+}
+
+model Comment {
+  id        String    @id @default(cuid())
+  content   String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  userId    String
+  postId    String
+  parentId  String?
+  user      User      @relation(fields: [userId], references: [id])
+  post      Post      @relation(fields: [postId], references: [id])
+  parent    Comment?  @relation("CommentToComment", fields: [parentId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  replies   Comment[] @relation("CommentToComment")
+  likes     Like[]
+
+  @@index([userId])
+  @@index([postId])
+  @@index([parentId])
+}
+
+model Like {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  
+  commentId String?
+  comment   Comment? @relation(fields: [commentId], references: [id], onDelete: Cascade)
+  
+  postId    String?
+  post      Post?    @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, commentId])
+  @@unique([userId, postId])
+  @@index([userId])
+  @@index([commentId])
+  @@index([postId])
+}
+
+model Reaction {
+  id        String   @id @default(cuid())
+  type      String
+  userId    String
+  postId    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user      User     @relation(fields: [userId], references: [id])
+  post      Post     @relation(fields: [postId], references: [id])
+
+  @@unique([userId, postId])
+  @@index([postId])
+}
+
+model posts {
+  id               String   @id @default(uuid())
+  title            String
+  articleContent   Json
+  smallDescription String
+  image            String
+  slug             String
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+  userId           String?
+  siteId           String?
+  
+  likes            Int      @default(0)
+  views            Int      @default(0)
+  status           String   @default("draft")
+  publishedAt      DateTime?
+  tags             String[]
+  metaDescription  String?
+  featuredImage    String?
+
+  @@unique([siteId, slug])
+}

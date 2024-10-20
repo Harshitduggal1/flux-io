@@ -1,0 +1,36 @@
+.neonButton {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+}
+
+.neonButton::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, #ff00de, #ff007f, #ff00de);
+  z-index: -1;
+  filter: blur(5px);
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.neonButton:hover::before {
+  opacity: 1;
+}
+
+.neonButton:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(255, 0, 128, 0.6);
+}
+
+.neonText {
+  color: white;
+  text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #ff00de, 0 0 35px #ff00de, 0 0 40px #ff00de, 0 0 50px #ff00de, 0 0 75px #ff00de;
+}

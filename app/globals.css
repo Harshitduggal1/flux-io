@@ -1,0 +1,104 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 210 40% 98%;
+    --foreground: 222 47% 11%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+    --primary: 221 83% 53%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222 47% 11%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 47%;
+    --accent: 210 40% 96%;
+    --accent-foreground: 222 47% 11%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 221 83% 53%;
+    --radius: 0.75rem;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+    --button-gradient: linear-gradient(135deg, #6366f1, #8b5cf6, #d946ef);
+    --button-hover-gradient: linear-gradient(135deg, #4f46e5, #7c3aed, #c026d3);
+  }
+
+  .dark {
+    --background: 222 47% 11%;
+    --foreground: 210 40% 98%;
+    --card: 222 47% 11%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222 47% 11%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 217 91% 60%;
+    --primary-foreground: 222 47% 11%;
+    --secondary: 217 33% 17%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217 33% 17%;
+    --muted-foreground: 215 20% 65%;
+    --accent: 217 33% 17%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217 33% 17%;
+    --input: 217 33% 17%;
+    --ring: 224 76% 48%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+    --button-gradient: linear-gradient(135deg, #6366f1, #8b5cf6, #d946ef);
+    --button-hover-gradient: linear-gradient(135deg, #4f46e5, #7c3aed, #c026d3);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply relative overflow-hidden rounded-full px-6 py-3 font-semibold text-white transition-all duration-300 ease-in-out;
+    background-image: var(--button-gradient);
+  }
+  .btn::before {
+    @apply absolute inset-0 opacity-0 transition-opacity duration-300 ease-in-out content-[''];
+    background-image: var(--button-hover-gradient);
+  }
+  .btn:hover::before {
+    @apply opacity-100;
+  }
+  .btn span {
+    @apply relative z-10;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary via-purple-500 to-pink-500;
+  }
+  .bg-glass {
+    @apply bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg;
+  }
+  .shadow-neon {
+    box-shadow: 0 0 5px theme('colors.primary.DEFAULT'),
+                0 0 20px theme('colors.primary.DEFAULT');
+  }
+}
