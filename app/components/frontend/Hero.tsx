@@ -59,7 +59,7 @@ export function Hero() {
                 <Button variant="secondary" className="hover:bg-primary shadow-xl px-8 py-4 text-lg hover:text-white transform transition-all duration-300 ease-in-out hover:scale-110">Sign in</Button>
               </LoginLink>
               <RegisterLink>
-                <Button className="bg-gradient-to-r from-purple-600 hover:from-purple-700 to-pink-600 hover:to-pink-700 shadow-xl px-8 py-4 font-bold text-lg text-white transform transition-all duration-300 ease-in-out hover:scale-110">Try for free</Button>
+                <Button className="bg-gradient-to-r from-purple-500 hover:from-purple-700 to-pink-600 hover:to-pink-700 shadow-xl px-8 py-4 font-bold text-lg text-white transform transition-all duration-300 ease-in-out hover:scale-110">Try for free</Button>
               </RegisterLink>
             </div>
           </div>

@@ -1,7 +1,6 @@
 "use client";
 
 import { CreateSiteAction } from "@/app/actions";
-import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -13,26 +12,26 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { useActionState } from "react";
 import { useForm } from "@conform-to/react";
 import { parseWithZod } from "@conform-to/zod";
 import { siteSchema } from "@/app/utils/zodSchemas";
 import { SubmitButton } from "@/app/components/dashboard/SubmitButtons";
+import { useActionState } from "react";
 
 export default function NewSiteRoute() {
-  const [lastResult, action] = useActionState(CreateSiteAction, undefined);
+  const [state, formAction, isPending] = useActionState(CreateSiteAction, null);
+  
   const [form, fields] = useForm({
-    lastResult,
-
+    lastResult: state,
     onValidate({ formData }) {
       return parseWithZod(formData, {
         schema: siteSchema,
       });
     },
-
     shouldValidate: "onBlur",
     shouldRevalidate: "onInput",
   });
+
   return (
     <div className="flex flex-col flex-1 justify-center items-center bg-gradient-to-br from-blue-50 dark:from-blue-900 via-purple-50 dark:via-purple-900 to-pink-50 dark:to-pink-900 p-8 min-h-screen">
       <Card className="bg-white dark:bg-gray-800 bg-opacity-80 dark:bg-opacity-80 shadow-xl hover:shadow-2xl backdrop-blur-lg backdrop-filter rounded-2xl w-full max-w-[450px] transition-all duration-300 overflow-hidden">
@@ -42,7 +41,7 @@ export default function NewSiteRoute() {
             Create your Site here. Click the button below once you&apos;re done...
           </CardDescription>
         </CardHeader>
-        <form id={form.id} onSubmit={form.onSubmit} action={action}>
+        <form id={form.id} action={formAction}>
           <CardContent className="space-y-6">
             <div className="space-y-4">
               <div className="space-y-2">
@@ -91,6 +90,7 @@ export default function NewSiteRoute() {
             <SubmitButton text="Create Site" className="bg-gradient-to-r from-blue-500 hover:from-blue-600 via-purple-500 hover:via-purple-600 to-pink-500 hover:to-pink-600 px-4 py-2 rounded-full focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 w-full font-bold text-white transform transition-all duration-300 hover:scale-105 focus:outline-none" />
           </CardFooter>
         </form>
+        {isPending ? "Loading..." : state && <p>{JSON.stringify(state)}</p>}
       </Card>
     </div>
   );

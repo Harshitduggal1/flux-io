@@ -277,9 +277,11 @@ export async function generateBlogPostAction(uploadResponse: any, userId: string
       };
     }
 
-    // Step 5: Revalidate and redirect
-    revalidatePath(`/posts/${postId}`);
-    redirect(`/posts/${postId}`);
+    // Step 5: Revalidate the posts page
+    revalidatePath('/posts');
+
+    // Return success with postId
+    return { success: true, postId };
 
   } catch (error) {
     console.error("Error in generateBlogPostAction:", error);

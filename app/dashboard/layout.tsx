@@ -3,7 +3,7 @@ import { ReactNode } from "react";
 import Logo from "@/public/logo.svg";
 import Image from "next/image";
 import { DashboardItems } from "../components/dashboard/DashboardItems";
-import { BarChart2, CircleUser, DollarSign, Globe, Home ,Plug,Settings,Sparkles, Users  } from "lucide-react";
+import { BarChart2, CircleUser, DollarSign, Globe, Home, Plug, Settings, Sparkles, Users } from "lucide-react";
 import { ThemeToggle } from "../components/dashboard/ThemeToggle";
 import {
   DropdownMenu,
@@ -14,7 +14,8 @@ import {
 import { Button } from "@/components/ui/button";
 import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
 
-export const navLinks = [
+// Move navLinks to a separate file or declare it inside the component if it's only used here
+const navLinks = [
   {
     name: "Dashboard",
     href: "/dashboard",

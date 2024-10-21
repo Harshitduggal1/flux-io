@@ -1,57 +1,59 @@
-import { CloudRain } from "lucide-react";
+import { CloudRain, Zap, Shield, Smile } from "lucide-react";
 
 const features = [
   {
-    name: "Sign up for free",
+    name: "Free Sign-up",
     description:
-      "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna.",
+      "Join the revolution effortlessly. Our seamless registration process gets you started on your journey to blogging success in seconds.",
     icon: CloudRain,
   },
   {
-    name: "Balzing fast",
+    name: "Lightning-Fast Performance",
     description:
-      "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna.",
-    icon: CloudRain,
+      "Experience unparalleled speed. Our platform is optimized for blazing-fast load times, ensuring your content reaches readers instantly.",
+    icon: Zap,
   },
   {
-    name: "Super secure with Kinde",
+    name: "Fortress-like Security with Kinde",
     description:
-      "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna.",
-    icon: CloudRain,
+      "Rest easy knowing your data is protected. Our Kinde-powered security measures provide an impenetrable shield for your digital assets.",
+    icon: Shield,
   },
   {
-    name: "Easy to use",
+    name: "Intuitive User Experience",
     description:
-      "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna.",
-    icon: CloudRain,
+      "Simplicity meets sophistication. Our user-friendly interface makes managing your blog a breeze, allowing you to focus on what matters most - your content.",
+    icon: Smile,
   },
 ];
-
 export function Features() {
   return (
-    <div className="py-24 sm:py-32">
-      <div className="max-w-2xl mx-auto lg:text-center">
-        <p className="font-semibold leading-7 text-primary">Blog Faster</p>
-        <h1 className="mt-2 text-3xl font-bold tracking-tight sm:text-4xl">
-          Get your blog up and running in minutes
+    <div className="py-24 sm:py-32 bg-gradient-to-br from-gray-900 via-purple-900 to-violet-900">
+      <div className="max-w-4xl mx-auto lg:text-center px-4 sm:px-6 lg:px-8">
+        <p className="font-extrabold text-transparent text-lg bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
+          Revolutionize Your Blogging
+        </p>
+        <h1 className="mt-4 text-4xl font-black tracking-tight sm:text-6xl bg-clip-text text-transparent bg-gradient-to-r from-emerald-300 via-blue-500 to-purple-600">
+          Unleash the Power of AI-Driven Blogging
         </h1>
-        <p className="mt-6 text-base leading-snug text-muted-foreground">
-          Right here you can create a blog in minutes. We make it easy for you
-          to create a blog in minutes. The blog is very fast and easy to create.
+        <p className="mt-6 text-lg leading-8 text-gray-300 backdrop-blur-sm bg-white/10 rounded-xl p-6 shadow-2xl">
+          Welcome to the future of content creation. Our trillion-dollar blogging platform
+          harnesses cutting-edge AI technology to supercharge your writing and skyrocket
+          your SEO rankings. Dominate the digital landscape with unparalleled ease and efficiency.
         </p>
       </div>
 
-      <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-4xl">
-        <div className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-2 lg:gap-y-16">
+      <div className="mx-auto mt-20 max-w-7xl px-6 lg:px-8">
+        <div className="grid grid-cols-1 gap-x-8 gap-y-16 sm:grid-cols-2 lg:grid-cols-2 lg:gap-24">
           {features.map((feature) => (
-            <div key={feature.name} className="relative pl-16">
-              <div className="text-base font-semibold leading-7">
-                <div className="absolute left-0 top-0 flex size-10 items-center justify-center rounded-lg bg-primary">
-                  <feature.icon className="w-6 h-6 text-white" />
+            <div key={feature.name} className="relative backdrop-blur-md bg-white/5 rounded-2xl p-10 shadow-[0_8px_30px_rgb(0,0,0,0.12)] transition-all duration-300 hover:shadow-[0_8px_30px_rgba(14,165,233,0.3)] hover:-translate-y-1">
+              <div className="text-xl font-bold leading-7 text-white mb-4">
+                <div className="absolute left-5 top-5 flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 shadow-lg">
+                  <feature.icon className="h-8 w-8 text-white" />
                 </div>
-                {feature.name}
+                <span className="ml-20">{feature.name}</span>
               </div>
-              <p className="mt-2 text-sm text-muted-foreground leading-snug">
+              <p className="mt-2 text-base text-gray-300 leading-7 ml-20">
                 {feature.description}
               </p>
             </div>
