@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useState } from 'react';
-import { useActionState } from 'react';
+import { useFormState } from '@/app/hooks/useFormState'; // Updated import
 import { useForm } from '@conform-to/react';
 import { parseWithZod } from '@conform-to/zod';
 import { GoogleGenerativeAI } from '@google/generative-ai';
@@ -36,7 +36,7 @@ export default function ArticleCreationRoute({ params }: { params: { siteId: str
   const [slug, setSlugValue] = useState<string | undefined>(undefined);
   const [title, setTitle] = useState<string | undefined>(undefined);
   const [generatedContent, setGeneratedContent] = useState<string | undefined>(undefined);
-  const [state, formAction, isPending] = useActionState(CreatePostAction, null);
+  const [state, formAction] = useFormState(CreatePostAction, null); // Updated usage
   const router = useRouter();
   const [isGenerating, setIsGenerating] = useState(false);
   const [generatingText, setGeneratingText] = useState('Generate Article');
@@ -332,7 +332,6 @@ export default function ArticleCreationRoute({ params }: { params: { siteId: str
             </form>
           </CardContent>
         </Card>
-        {isPending && <p>Submitting...</p>}
         {state && <p>Last action result: {JSON.stringify(state)}</p>}
       </div>
 
