@@ -223,7 +223,7 @@ export default function ArticleCreationRoute({ params }: { params: { siteId: str
                 <Label className="bg-clip-text bg-gradient-to-r from-pink-500 via-blue-500 to-purple-500 font-semibold text-lg text-transparent">Let Our Magic AI generate your Article</Label>
                 <div className="flex sm:flex-row flex-col items-stretch sm:items-center gap-4">
                   <Input
-                    placeholder="Enter a prompt for Article generation"
+                    placeholder="Enter a prompt for Article generation With Our Magic AI"
                     value={prompt}
                     onChange={(e) => setPrompt(e.target.value)}
                     className="flex-grow border-2 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 p-3 focus:border-blue-500 rounded-lg text-lg transition-all duration-300"
@@ -253,7 +253,7 @@ export default function ArticleCreationRoute({ params }: { params: { siteId: str
               </div>
 
               <div className="space-y-4">
-                <Label className="font-semibold text-gray-700 text-lg dark:text-gray-300">Generated Content</Label>
+                <Label className="font-semibold text-gray-800 text-lg dark:text-gray-300">Generated Content</Label>
                 <Textarea
                   className="border-2 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 p-4 focus:border-blue-500 rounded-lg min-h-[200px] text-gray-900 text-lg dark:text-gray-100 transition-all duration-300"
                   value={generatedContent || ''}
@@ -270,7 +270,7 @@ export default function ArticleCreationRoute({ params }: { params: { siteId: str
                   <span className="top-0 left-0 absolute bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 opacity-0 group-hover:opacity-70 w-full h-full transition-opacity duration-300 filter"></span>
                   <span className="relative z-10 flex justify-center items-center">
                     <Clipboard className="mr-2 text-neon-purple animate-pulse size-5" />
-                    <span className="text-lg text-neon-pink">Copy to Clipboard</span>
+                    <span className="text-lg text-neon-pink">Copy to ClipboardClipboard⚡️</span>
                   </span>
                   <span className="group-hover:scale-x-100 bottom-0 left-0 absolute bg-gradient-to-r from-purple-300 via-pink-300 to-red-300 w-full h-1 transform transition-transform duration-300 scale-x-0"></span>
                   <span className="absolute inset-0 opacity-0 group-hover:opacity-100 shadow-[0_0_15px_rgba(147,51,234,0.5),0_0_15px_rgba(236,72,153,0.5),0_0_15px_rgba(239,68,68,0.5)] rounded-lg transition-opacity duration-300"></span>
@@ -279,7 +279,7 @@ export default function ArticleCreationRoute({ params }: { params: { siteId: str
               </div>
 
               <div className="space-y-4">
-                <Label className="font-semibold text-gray-700 text-lg dark:text-gray-300">Article Content</Label>
+                <Label className="font-semibold text-gray-700 text-lg dark:text-gray-300">Now past your Article Content here 👇🏻</Label>
                 <input
                   type="hidden"
                   name={fields.articleContent.name}
@@ -287,7 +287,7 @@ export default function ArticleCreationRoute({ params }: { params: { siteId: str
                   defaultValue={fields.articleContent.initialValue}
                   value={JSON.stringify(value)}
                 />
-                <div className="border-2 border-gray-300 rounded-lg overflow-hidden">
+                <div className="border-2 border-blue-800 rounded-lg overflow-hidden">
                   <TailwindEditor onChange={setValue} initialValue={value} />
                 </div>
                 <p className="text-red-500 text-sm">
@@ -296,7 +296,7 @@ export default function ArticleCreationRoute({ params }: { params: { siteId: str
               </div>
 
               <div className="space-y-4">
-                <Label className="font-semibold text-gray-700 text-lg dark:text-gray-300">Cover Image</Label>
+                <Label className="font-semibold text-gray-800 text-lg dark:text-gray-300">Cover Image</Label>
                 <input
                   type="hidden"
                   name="coverImage"
@@ -313,7 +313,7 @@ export default function ArticleCreationRoute({ params }: { params: { siteId: str
                     />
                   </div>
                 ) : (
-                  <div className="border-2 border-gray-300 p-8 border-dashed rounded-lg text-center">
+                  <div className="border-2 border-blue-800 p-8 border-dashed rounded-lg text-center">
                     <UploadDropzone
                       onClientUploadComplete={(res: { url: React.SetStateAction<string | undefined>; }[]) => {
                         setImageUrl(res[0].url);

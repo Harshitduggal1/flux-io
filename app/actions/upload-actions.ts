@@ -1,4 +1,4 @@
-export async function transcribeUploadedFile(resp: any[]) {
+export async function transcribeUploadedFile(data: any) {
   // Your transcription logic here
-  // ...
+  // Return the transcription result
 }

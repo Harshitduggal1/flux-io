@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
-import { navLinks } from "@/app/utils/navLinks";  // Import navLinks from the new file
+import { navLinks } from "@/app/utils/navLinks";
 
 export default function DashboardLayout({ children }: { children: ReactNode }) {
   return (

@@ -16,14 +16,15 @@ import { Atom } from "lucide-react";
 import Image from "next/image";
 import { toast } from "sonner";
 import TailwindEditor from "../EditorWrapper";
-import { SubmitButton } from "../SubmitButtons";
-import { useActionState, useState } from "react";
+import { useState } from "react";
 import { JSONContent } from "novel";
 import { useForm } from "@conform-to/react";
 import { parseWithZod } from "@conform-to/zod";
 import { PostSchema } from "@/app/utils/zodSchemas";
 import { EditPostActions } from "@/app/actions";
 import slugify from "react-slugify";
+import { useFormState } from "@/app/hooks/useFormState";
+import { useFormStatus } from 'react-dom';
 
 interface iAppProps {
   data: {
@@ -37,45 +38,46 @@ interface iAppProps {
   siteId: string;
 }
 
-export function EditArticleForm({ data, siteId }: iAppProps) {
-  const [imageUrl, setImageUrl] = useState<undefined | string>(data.image);
-  const [value, setValue] = useState<JSONContent | undefined>(
-    data.articleContent
+function SubmitButton() {
+  const { pending } = useFormStatus();
+  return (
+    <Button type="submit" disabled={pending}>
+      {pending ? 'Submitting...' : 'Edit Article'}
+    </Button>
   );
-  const [slug, setSlugValue] = useState<undefined | string>(data.slug);
-  const [title, setTitle] = useState<undefined | string>(data.title);
+}
 
-  const [state, formAction, isPending] = useActionState(EditPostActions, null);
+export function EditArticleForm({ data, siteId }: iAppProps) {
+  const [imageUrl, setImageUrl] = useState<string>(data.image);
+  const [value, setValue] = useState<JSONContent>(data.articleContent);
+  const [slug, setSlugValue] = useState<string>(data.slug);
+  const [title, setTitle] = useState<string>(data.title);
+
+  const [state, formAction] = useFormState(EditPostActions, null);
 
   const [form, fields] = useForm({
     lastResult: state,
-
     onValidate({ formData }) {
       return parseWithZod(formData, { schema: PostSchema });
     },
-
     shouldValidate: "onBlur",
     shouldRevalidate: "onInput",
   });
 
   function handleSlugGeneration() {
-    const titleInput = title;
-
-    if (titleInput?.length === 0 || titleInput === undefined) {
+    if (!title || title.length === 0) {
       return toast.error("Please create a title first");
     }
-
-    setSlugValue(slugify(titleInput));
-
+    setSlugValue(slugify(title));
     return toast.success("Slug has been created");
   }
 
   return (
     <Card className="mt-5">
       <CardHeader>
-        <CardTitle>Article Details</CardTitle>
-        <CardDescription>
-          Lipsum dolor sit amet, consectetur adipiscing elit
+        <CardTitle className="bg-clip-text bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 font-bold text-transparent">Article Details</CardTitle>
+        <CardDescription className="bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 text-transparent">
+          Edit your article details below 
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -163,7 +165,6 @@ export function EditArticleForm({ data, siteId }: iAppProps) {
                 }}
               />
             )}
-
             <p className="text-red-500 text-sm">{fields.coverImage.errors}</p>
           </div>
 
@@ -182,9 +183,8 @@ export function EditArticleForm({ data, siteId }: iAppProps) {
             </p>
           </div>
 
-          <SubmitButton text="Edit Article" />
+          <SubmitButton />
         </form>
-        {isPending ? "Loading..." : null}
         {state && <p>Last action result: {JSON.stringify(state)}</p>}
       </CardContent>
     </Card>
