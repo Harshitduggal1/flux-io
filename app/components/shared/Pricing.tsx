@@ -1,3 +1,5 @@
+"use client"
+
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -11,6 +13,7 @@ import { Check } from "lucide-react";
 import { SubmitButton } from "../dashboard/SubmitButtons";
 import Link from "next/link";
 import { CreateSubscription } from "@/app/actions";
+import { motion } from "framer-motion";
 
 interface iAppProps {
   id: number;
@@ -49,22 +52,45 @@ export const PricingPlans: iAppProps[] = [
 
 export function PricingTable() {
   return (
-    <div className="relative overflow-hidden">
+    <div className="relative bg-gradient-to-r from-gray-900 to-gray-800 shadow-lg p-10 rounded-lg overflow-hidden">
       <div className="absolute inset-0 bg-transparent"></div>
       <div className="relative z-10 mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
         <div className="text-center">
-          <p className="bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 mb-4 font-extrabold text-lg text-transparent animate-pulse">Pricing</p>
-          <h1 className="bg-clip-text bg-gradient-to-r from-emerald-300 via-blue-500 to-purple-600 mt-2 font-black text-5xl text-transparent sm:text-7xl tracking-tight animate-text">
+          <motion.p 
+            className="bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 mb-4 font-extrabold text-lg text-transparent animate-pulse"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1 }}
+          >
+            Pricing
+          </motion.p>
+          <motion.h1 
+            className="bg-clip-text bg-gradient-to-r from-emerald-300 via-blue-500 to-purple-600 mt-2 font-black text-5xl text-transparent sm:text-7xl tracking-tight animate-text"
+            initial={{ y: -20 }}
+            animate={{ y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
             Elevate Your Blog with Our Plans
-          </h1>
+          </motion.h1>
         </div>
-        <p className="border-white/10 bg-white/5 shadow-2xl backdrop-blur-md mx-auto mt-8 p-6 border rounded-2xl max-w-2xl text-center text-gray-300 text-lg leading-relaxed">
+        <motion.p 
+          className="border-white/10 bg-white/5 shadow-2xl backdrop-blur-md mx-auto mt-8 p-6 border rounded-2xl max-w-2xl text-center text-gray-300 text-lg leading-relaxed"
+          initial={{ scale: 0.9 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 0.5 }}
+        >
           Choose the perfect plan to supercharge your content creation. From solo bloggers to enterprise teams, we&apos;ve got you covered.
-        </p>
+        </motion.p>
 
         <div className="gap-12 grid grid-cols-1 lg:grid-cols-2 mt-20">
           {PricingPlans.map((item) => (
-            <Card key={item.id} className={`${item.id === 1 ? "border-primary border-2" : ""} backdrop-blur-xl bg-white/5 rounded-3xl overflow-hidden transform hover:scale-105 transition-all duration-300 shadow-[0_8px_30px_rgba(14,165,233,0.2)] hover:shadow-[0_8px_30px_rgba(14,165,233,0.5)]`}>
+            <motion.div 
+              key={item.id} 
+              className={`${item.id === 1 ? "border-primary border-2" : ""} backdrop-blur-xl bg-white/5 rounded-3xl overflow-hidden transform hover:scale-105 transition-all duration-300 shadow-[0_8px_30px_rgba(14,165,233,0.2)] hover:shadow-[0_8px_30px_rgba(14,165,233,0.5)]`}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+            >
               <CardHeader className="bg-gradient-to-r from-purple-800/50 to-indigo-800/50 p-8">
                 <CardTitle className="font-black text-3xl">
                   {item.id === 1 ? (
@@ -105,7 +131,7 @@ export function PricingTable() {
                   </Button>
                 )}
               </CardFooter>
-            </Card>
+            </motion.div>
           ))}
         </div>
       </div>

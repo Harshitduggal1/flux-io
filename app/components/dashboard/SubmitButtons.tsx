@@ -17,27 +17,25 @@ interface iAppProps {
     | "ghost"
     | null
     | undefined;
-  disabled?: boolean;
 }
 
-export function SubmitButton({ text, className, variant, disabled }: iAppProps) {
+export function SubmitButton({ text, className, variant }: iAppProps) {
   const { pending } = useFormStatus();
-  const isDisabled = disabled || pending;
-
   return (
-    <Button
-      disabled={isDisabled}
-      className={cn("w-fit", className)}
-      variant={variant}
-      type="submit"
-    >
-      {isDisabled ? (
-        <>
+    <>
+      {pending ? (
+        <Button disabled className={cn("w-fit", className)} variant={variant}>
           <Loader2 className="mr-2 size-4 animate-spin" /> Please Wait
-        </>
+        </Button>
       ) : (
-        text
+        <Button
+          className={cn("w-fit", className)}
+          variant={variant}
+          type="submit"
+        >
+          {text}
+        </Button>
       )}
-    </Button>
+    </>
   );
 }

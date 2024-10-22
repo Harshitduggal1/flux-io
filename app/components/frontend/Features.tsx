@@ -28,32 +28,32 @@ const features = [
 ];
 export function Features() {
   return (
-    <div className="py-24 sm:py-32 bg-gradient-to-br from-gray-900 via-purple-900 to-violet-900">
-      <div className="max-w-4xl mx-auto lg:text-center px-4 sm:px-6 lg:px-8">
-        <p className="font-extrabold text-transparent text-lg bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
+    <div className="bg-transparent py-24 sm:py-32">
+      <div className="mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl lg:text-center">
+        <p className="bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 font-extrabold text-lg text-transparent">
           Revolutionize Your Blogging
         </p>
-        <h1 className="mt-4 text-4xl font-black tracking-tight sm:text-6xl bg-clip-text text-transparent bg-gradient-to-r from-emerald-300 via-blue-500 to-purple-600">
+        <h1 className="bg-clip-text bg-gradient-to-r from-emerald-300 via-blue-500 to-purple-600 mt-4 font-black text-4xl text-transparent sm:text-6xl tracking-tight">
           Unleash the Power of AI-Driven Blogging
         </h1>
-        <p className="mt-6 text-lg leading-8 text-gray-300 backdrop-blur-sm bg-white/10 rounded-xl p-6 shadow-2xl">
+        <p className="bg-white/10 shadow-2xl backdrop-blur-sm mt-6 p-6 rounded-xl text-gray-900 text-lg leading-8">
           Welcome to the future of content creation. Our trillion-dollar blogging platform
           harnesses cutting-edge AI technology to supercharge your writing and skyrocket
           your SEO rankings. Dominate the digital landscape with unparalleled ease and efficiency.
         </p>
       </div>
 
-      <div className="mx-auto mt-20 max-w-7xl px-6 lg:px-8">
-        <div className="grid grid-cols-1 gap-x-8 gap-y-16 sm:grid-cols-2 lg:grid-cols-2 lg:gap-24">
+      <div className="mx-auto mt-20 px-6 lg:px-8 max-w-7xl">
+        <div className="gap-x-8 gap-y-16 lg:gap-24 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2">
           {features.map((feature) => (
-            <div key={feature.name} className="relative backdrop-blur-md bg-white/5 rounded-2xl p-10 shadow-[0_8px_30px_rgb(0,0,0,0.12)] transition-all duration-300 hover:shadow-[0_8px_30px_rgba(14,165,233,0.3)] hover:-translate-y-1">
-              <div className="text-xl font-bold leading-7 text-white mb-4">
-                <div className="absolute left-5 top-5 flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 shadow-lg">
-                  <feature.icon className="h-8 w-8 text-white" />
+            <div key={feature.name} className="relative bg-white/5 shadow-[0_8px_30px_rgb(0,0,0,0.12)] hover:shadow-[0_8px_30px_rgba(14,165,233,0.3)] backdrop-blur-md p-10 rounded-2xl transition-all hover:-translate-y-1 duration-300">
+              <div className="mb-4 font-bold text-gray-900 text-xl leading-7">
+                <div className="top-5 left-5 absolute flex justify-center items-center bg-gradient-to-r from-cyan-500 to-blue-500 shadow-lg rounded-full w-16 h-16">
+                  <feature.icon className="w-8 h-8 text-gray-900" />
                 </div>
                 <span className="ml-20">{feature.name}</span>
               </div>
-              <p className="mt-2 text-base text-gray-300 leading-7 ml-20">
+              <p className="mt-2 ml-20 text-base text-gray-900 leading-7">
                 {feature.description}
               </p>
             </div>

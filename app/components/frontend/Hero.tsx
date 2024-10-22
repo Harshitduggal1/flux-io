@@ -1,18 +1,22 @@
+"use client"
+
 import Image from "next/image";
 import Link from "next/link";
-import Logo from "@/public/logo.svg";
+import Logo from "@/public/lego.png";
 import { ThemeToggle } from "../dashboard/ThemeToggle";
 import {
   LoginLink,
   RegisterLink,
 } from "@kinde-oss/kinde-auth-nextjs/components";
 import { Button } from "@/components/ui/button";
-import HeroImage from "@/public/hero.png";
+import HeroImage from "@/public/blogs.png";
+import Particles from "@/components/ui/particles";
 
 export function Hero() {
   return (
     <>
-      <div className="relative flex bg-transparent from-gray-900 via-purple-900 to-violet-900 bg-opacity-30 shadow-2xl backdrop-blur-lg backdrop-filter mx-auto py-5 rounded-3xl w-full">
+      <div className="relative flex bg-gradient-to-r from-gray-900 via-purple-900 to-violet-900 bg-opacity-30 shadow-2xl backdrop-blur-lg backdrop-filter mx-auto py-5 rounded-3xl w-full">
+     
         <div className="flex flex-row justify-between lg:justify-start items-center px-6 w-full text-sm">
           <Link href="/" className="flex items-center gap-1 hover:scale-105 transition-transform duration-300 ease-in-out">
             <Image src={Logo} className="animate-pulse size-10" alt="Logo" />
@@ -37,7 +41,14 @@ export function Hero() {
         </nav>
       </div>
 
-      <section className="bg-transparent">
+      <section className="bg-gradient-to-r from-purple-900 to-violet-900">
+      <Particles
+        className="absolute inset-0"
+        quantity={100}
+        ease={80}
+        color="#ffffff"
+        refresh
+      />
         <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]"></div>
         <div className="relative z-10 items-center py-12 lg:py-20 w-full">
           <div className="px-4 w-full text-center">
