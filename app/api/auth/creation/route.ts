@@ -1,8 +1,10 @@
-import prisma from "@/app/utils/db";
+import { NextRequest, NextResponse } from "next/server";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
-import { NextResponse } from "next/server";
+import prisma from "@/app/utils/db";
 
-export async function GET() {
+export const dynamic = 'force-dynamic';
+
+export async function GET(request: NextRequest) {
   const { getUser } = getKindeServerSession();
   const user = await getUser();
 
@@ -31,7 +33,7 @@ export async function GET() {
 
   return NextResponse.redirect(
     process.env.NODE_ENV === "production"
-      ? "https://blog-marshal.vercel.app/dasboard"
+      ? "https://blog-marshal.vercel.app/dashboard"
       : "http://localhost:3000/dashboard"
   );
 }
