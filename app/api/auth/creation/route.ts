@@ -37,9 +37,10 @@ export async function GET(request: NextRequest) {
   }
 
   // Redirect to the dashboard
+  //for flux.io.vercel.app
   return NextResponse.redirect(
     process.env.NODE_ENV === "production"
-      ? "https://blog-marshal.vercel.app/dashboard"
+      ? "https://flux-io.vercel.app/dashboard"
       : "http://localhost:3000/dashboard"
   );
 }

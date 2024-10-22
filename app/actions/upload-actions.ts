@@ -1,4 +1,6 @@
-export async function transcribeUploadedFile(data: any) {
-  // Your transcription logic here
-  // Return the transcription result
+// app/actions/upload-actions.ts
+"use server";
+
+export async function transcribeUploadedFile(params: any) {
+  // Implementation
 }
