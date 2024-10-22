@@ -36,13 +36,13 @@ export default function ArticleCreationRoute({ params }: { params: { siteId: str
   const [slug, setSlugValue] = useState<string | undefined>(undefined);
   const [title, setTitle] = useState<string | undefined>(undefined);
   const [generatedContent, setGeneratedContent] = useState<string | undefined>(undefined);
-  const [lastResult, action] = useActionState(CreatePostAction, undefined);
+  const [state, formAction, isPending] = useActionState(CreatePostAction, null);
   const router = useRouter();
   const [isGenerating, setIsGenerating] = useState(false);
   const [generatingText, setGeneratingText] = useState('Generate Article');
 
   const [form, fields] = useForm({
-    lastResult,
+    lastResult: state,
     onValidate({ formData }) {
       return parseWithZod(formData, { schema: PostSchema });
     },
@@ -158,8 +158,7 @@ export default function ArticleCreationRoute({ params }: { params: { siteId: str
             <form
               className="flex flex-col gap-8"
               id={form.id}
-              onSubmit={form.onSubmit}
-              action={action}
+              action={formAction}
             >
               <input type="hidden" name="siteId" value={params.siteId} />
               
@@ -333,6 +332,8 @@ export default function ArticleCreationRoute({ params }: { params: { siteId: str
             </form>
           </CardContent>
         </Card>
+        {isPending && <p>Submitting...</p>}
+        {state && <p>Last action result: {JSON.stringify(state)}</p>}
       </div>
 
   );

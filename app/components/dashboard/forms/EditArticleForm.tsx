@@ -22,7 +22,7 @@ import { JSONContent } from "novel";
 import { useForm } from "@conform-to/react";
 import { parseWithZod } from "@conform-to/zod";
 import { PostSchema } from "@/app/utils/zodSchemas";
-import { CreatePostAction, EditPostActions } from "@/app/actions";
+import { EditPostActions } from "@/app/actions";
 import slugify from "react-slugify";
 
 interface iAppProps {
@@ -45,9 +45,10 @@ export function EditArticleForm({ data, siteId }: iAppProps) {
   const [slug, setSlugValue] = useState<undefined | string>(data.slug);
   const [title, setTitle] = useState<undefined | string>(data.title);
 
-  const [lastResult, action] = useActionState(EditPostActions, undefined);
+  const [state, formAction, isPending] = useActionState(EditPostActions, null);
+
   const [form, fields] = useForm({
-    lastResult,
+    lastResult: state,
 
     onValidate({ formData }) {
       return parseWithZod(formData, { schema: PostSchema });
@@ -61,13 +62,14 @@ export function EditArticleForm({ data, siteId }: iAppProps) {
     const titleInput = title;
 
     if (titleInput?.length === 0 || titleInput === undefined) {
-      return toast.error("Pleaes create a title first");
+      return toast.error("Please create a title first");
     }
 
     setSlugValue(slugify(titleInput));
 
     return toast.success("Slug has been created");
   }
+
   return (
     <Card className="mt-5">
       <CardHeader>
@@ -80,8 +82,7 @@ export function EditArticleForm({ data, siteId }: iAppProps) {
         <form
           className="flex flex-col gap-6"
           id={form.id}
-          onSubmit={form.onSubmit}
-          action={action}
+          action={formAction}
         >
           <input type="hidden" name="articleId" value={data.id} />
           <input type="hidden" name="siteId" value={siteId} />
@@ -183,6 +184,8 @@ export function EditArticleForm({ data, siteId }: iAppProps) {
 
           <SubmitButton text="Edit Article" />
         </form>
+        {isPending ? "Loading..." : null}
+        {state && <p>Last action result: {JSON.stringify(state)}</p>}
       </CardContent>
     </Card>
   );

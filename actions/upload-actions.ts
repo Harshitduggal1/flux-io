@@ -97,7 +97,7 @@ async function ensureFileAccessible(fileUrl: string): Promise<void> {
   }
 }
 
-async function transcribeUploadedFile(fileUrl: string): Promise<string> {
+export async function transcribeUploadedFile(fileUrl: string): Promise<string> {
   console.log("Starting transcription process for file:", fileUrl);
 
   try {

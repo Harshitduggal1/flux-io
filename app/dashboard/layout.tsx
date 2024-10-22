@@ -3,7 +3,7 @@ import { ReactNode } from "react";
 import Logo from "@/public/logo.svg";
 import Image from "next/image";
 import { DashboardItems } from "../components/dashboard/DashboardItems";
-import { BarChart2, CircleUser, DollarSign, Globe, Home, Plug, Settings, Sparkles, Users } from "lucide-react";
+import { CircleUser } from "lucide-react";
 import { ThemeToggle } from "../components/dashboard/ThemeToggle";
 import {
   DropdownMenu,
@@ -13,50 +13,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
-
-// Move navLinks to a separate file or declare it inside the component if it's only used here
-const navLinks = [
-  {
-    name: "Dashboard",
-    href: "/dashboard",
-    icon: Home,
-  },
-  {
-    name: "Sites",
-    href: "/dashboard/sites",
-    icon: Globe,
-  },
-  {
-    name: "Pricing",
-    href: "/dashboard/pricing",
-    icon: DollarSign,
-  },
-  {
-    name: "Generate",
-    href: "/dashboard/generate",
-    icon: Sparkles,
-  },
-  {
-    name: "Analytics",
-    href: "/dashboard/analytics",
-    icon: BarChart2,
-  },
-  {
-    name: "Team",
-    href: "/dashboard/team",
-    icon: Users,
-  },
-  {
-    name: "Integrations",
-    href: "/dashboard/integrations",
-    icon: Plug,
-  },
-  {
-    name: "Settings",
-    href: "/dashboard/settings",
-    icon: Settings,
-  },
-];
+import { navLinks } from "@/app/utils/navLinks";  // Import navLinks from the new file
 
 export default function DashboardLayout({ children }: { children: ReactNode }) {
   return (
@@ -66,7 +23,6 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
           <div className="flex items-center px-4 lg:px-6 border-b h-14 lg:h-[60px]">
             <Link href="/" className="flex items-center gap-2 font-semibold">
               <Image src={Logo} alt="Logo" className="size-8" />
-
               <h3 className="text-2xl">
                 <span className="bg-clip-text bg-gradient-to-r from-blue-500 hover:from-cyan-600 via-purple-500 hover:via-purple-600 to-pink-500 hover:to-pink-600 font-extrabold text-2xl text-transparent transition-all animate-pulse duration-300">Flux.io</span>
               </h3>
@@ -75,7 +31,12 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
 
           <div className="flex-1">
             <nav className="items-start grid px-2 lg:px-4 font-medium">
-              <DashboardItems />
+              {navLinks.map((link) => (
+                <Link key={link.href} href={link.href} className="flex items-center gap-2 py-2">
+                  <link.icon className="w-4 h-4" />
+                  {link.name}
+                </Link>
+              ))}
             </nav>
           </div>
         </div>

@@ -275,3 +275,13 @@ export async function ValidateSite(siteData: any) {
   const result = siteSchema.safeParse(siteData);
   return result.success ? { isValid: true } : { isValid: false, errors: result.error.errors };
 }
+
+export async function transcribeUploadedFile(data: any[]) {
+  // Implementation of transcription logic
+}
+
+export async function generateBlogPostAction(currentState: any, params: any) {
+  // Implementation of blog post generation logic
+  // Use params for the generation process
+  // Return the generated blog post or any relevant data
+}

@@ -1,5 +1,6 @@
 "use client";
 
+import { useActionState } from "react";
 import { CreateSiteAction } from "@/app/actions";
 import {
   Card,
@@ -16,7 +17,6 @@ import { useForm } from "@conform-to/react";
 import { parseWithZod } from "@conform-to/zod";
 import { siteSchema } from "@/app/utils/zodSchemas";
 import { SubmitButton } from "@/app/components/dashboard/SubmitButtons";
-import { useActionState } from "react";
 
 export default function NewSiteRoute() {
   const [state, formAction, isPending] = useActionState(CreateSiteAction, null);
@@ -90,7 +90,8 @@ export default function NewSiteRoute() {
             <SubmitButton text="Create Site" className="bg-gradient-to-r from-blue-500 hover:from-blue-600 via-purple-500 hover:via-purple-600 to-pink-500 hover:to-pink-600 px-4 py-2 rounded-full focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 w-full font-bold text-white transform transition-all duration-300 hover:scale-105 focus:outline-none" />
           </CardFooter>
         </form>
-        {isPending ? "Loading..." : state && <p>{JSON.stringify(state)}</p>}
+        {isPending && <p>Loading...</p>}
+        {state && <p>{JSON.stringify(state)}</p>}
       </Card>
     </div>
   );

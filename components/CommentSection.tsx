@@ -62,6 +62,7 @@ export default function CommentSection({ postId }: CommentSectionProps): JSX.Ele
   const [commentLimit, setCommentLimit] = useState<number>(10);
   const [isAILoading, setIsAILoading] = useState<boolean>(false);
   const { theme, setTheme } = useTheme();
+  const [parsedContents, setParsedContents] = useState<Record<string, string>>({});
 
   const apiKey = process.env.NEXT_PUBLIC_GEMINI_API_KEY;
   const genAI = apiKey ? new GoogleGenerativeAI(apiKey) : null;
@@ -233,7 +234,7 @@ export default function CommentSection({ postId }: CommentSectionProps): JSX.Ele
               ) : (
                 <div 
                   className="text-gray-700 text-sm dark:text-gray-300"
-                  dangerouslySetInnerHTML={{ __html: marked.parse(comment.content) }}
+                  dangerouslySetInnerHTML={{ __html: parsedContents[comment.id] || 'Loading...' }}
                 />
               )}
               <div className="flex items-center space-x-3 text-xs">
@@ -361,6 +362,24 @@ export default function CommentSection({ postId }: CommentSectionProps): JSX.Ele
       });
     }
   };
+
+  const parseCommentContent = useCallback(async (commentId: string, content: string) => {
+    try {
+      const parsedContent = await marked.parse(content);
+      setParsedContents(prev => ({ ...prev, [commentId]: parsedContent }));
+    } catch (error) {
+      console.error('Error parsing comment:', error);
+      setParsedContents(prev => ({ ...prev, [commentId]: 'Error parsing comment' }));
+    }
+  }, []);
+
+  useEffect(() => {
+    comments.forEach(comment => {
+      if (!parsedContents[comment.id]) {
+        parseCommentContent(comment.id, comment.content);
+      }
+    });
+  }, [comments, parseCommentContent, parsedContents]);
 
   return (
     <div className="bg-gray-50 dark:bg-gray-900 shadow-xl mx-auto p-6 rounded-2xl max-w-3xl transition-all duration-500">
