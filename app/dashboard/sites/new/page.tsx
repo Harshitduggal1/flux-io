@@ -81,7 +81,7 @@ export default function NewSiteRoute() {
               </div>
 
               <div className="space-y-2">
-                <Label className="font-semibold text-gray-700 text-sm dark:text-gray-200">Description</Label>
+                <Label className="bg-clip-text bg-gradient-to-r from-blue-400 dark:from-blue-300 via-purple-500 dark:via-purple-400 to-pink-500 dark:to-pink-400 font-semibold text-sm text-transparent">Description</Label>
                 <Textarea
                   name={fields.description.name}
                   key={fields.description.key}
