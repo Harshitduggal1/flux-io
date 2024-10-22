@@ -1,5 +1,4 @@
-{
-  "name": "flux-io",
+{"name": "flux-io",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -51,7 +50,7 @@
     "install": "^0.13.0",
     "lucide-react": "^0.424.0",
     "marked": "^14.1.3",
-    "next": "^15.0.0-rc.1",
+    "next": "^14.2.15",
     "next-themes": "^0.3.0",
     "novel": "^0.5.0",
     "npm": "^10.9.0",
