@@ -6,13 +6,16 @@ import { PostSchema, SiteCreationSchema, siteSchema } from "./utils/zodSchemas";
 import prisma from "./utils/db";
 import { requireUser } from "./utils/requireUser";
 import { stripe } from "./utils/stripe";
+import { transcribeUploadedFile as originalTranscribeUploadedFile } from './actions/upload-actions';
 
+// Action to create a new site
 export async function CreateSiteAction(prevState: any, formData: FormData) {
   // Your action logic here
   // Use formData to get the form values
   // Return the new state
 }
 
+// Action to create a new blog post
 export async function CreatePostAction(prevState: any, formData: FormData) {
   const user = await requireUser();
 
@@ -39,12 +42,14 @@ export async function CreatePostAction(prevState: any, formData: FormData) {
   return redirect(`/dashboard/sites/${formData.get("siteId")}`);
 }
 
+// Action to edit an existing post
 export async function EditPostActions(formData: FormData) {
   // Your action logic here
   // Use formData to get the form values
   // Return the new state
 }
 
+// Action to delete a post
 export async function DeletePost(formData: FormData) {
   const user = await requireUser();
 
@@ -58,6 +63,7 @@ export async function DeletePost(formData: FormData) {
   return redirect(`/dashboard/sites/${formData.get("siteId")}`);
 }
 
+// Action to update the image of a site
 export async function UpdateImage(formData: FormData) {
   const user = await requireUser();
 
@@ -74,6 +80,7 @@ export async function UpdateImage(formData: FormData) {
   return redirect(`/dashboard/sites/${formData.get("siteId")}`);
 }
 
+// Action to delete a site
 export async function DeleteSite(formData: FormData) {
   const user = await requireUser();
 
@@ -87,6 +94,7 @@ export async function DeleteSite(formData: FormData) {
   return redirect("/dashboard/sites");
 }
 
+// Action to create a subscription
 export async function CreateSubscription() {
   const user = await requireUser();
 
@@ -101,6 +109,7 @@ export async function CreateSubscription() {
     },
   });
 
+  // Create a new Stripe customer if one doesn't exist
   if (!stripeUserId?.customerId) {
     const stripeCustomer = await stripe.customers.create({
       email: stripeUserId?.email,
@@ -117,6 +126,7 @@ export async function CreateSubscription() {
     });
   }
 
+  // Create a Stripe checkout session
   const session = await stripe.checkout.sessions.create({
     customer: stripeUserId.customerId as string,
     mode: "subscription",
@@ -140,14 +150,18 @@ export async function CreateSubscription() {
   return redirect(session.url as string);
 }
 
-// Use siteSchema to validate site data
+// Function to validate site data using siteSchema
 export async function ValidateSite(siteData: any) {
   const result = siteSchema.safeParse(siteData);
   return result.success ? { isValid: true } : { isValid: false, errors: result.error.errors };
 }
 
-export { transcribeUploadedFile } from './actions/upload-actions';
+// Wrapper function for transcribeUploadedFile
+export async function transcribeUploadedFile(params: any): Promise<any> {
+  return originalTranscribeUploadedFile(params);
+}
 
+// Action to generate a blog post
 export async function generateBlogPostAction(params: any) {
   // Implementation
 }
