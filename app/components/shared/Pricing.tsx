@@ -52,15 +52,16 @@ export const PricingPlans: iAppProps[] = [
 
 export function PricingTable() {
   return (
-    <div className="relative bg-gradient-to-r from-gray-900 to-gray-800 shadow-lg p-10 rounded-lg overflow-hidden">
+    <div className="relative bg-transparent">
       <div className="absolute inset-0 bg-transparent"></div>
       <div className="relative z-10 mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
         <div className="text-center">
           <motion.p 
-            className="bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 mb-4 font-extrabold text-lg text-transparent animate-pulse"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1 }}
+            className="bg-clip-text bg-gradient-to-r from-purple-500 to-pink-700 mb-4 font-extrabold text-lg text-transparent transition-transform animate-pulse duration-500 hover:scale-110"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.8 }}
+            transition={{ duration: 1, ease: [0.68, -0.55, 0.27, 1.55] }}
           >
             Pricing
           </motion.p>
@@ -74,7 +75,7 @@ export function PricingTable() {
           </motion.h1>
         </div>
         <motion.p 
-          className="border-white/10 bg-white/5 shadow-2xl backdrop-blur-md mx-auto mt-8 p-6 border rounded-2xl max-w-2xl text-center text-gray-300 text-lg leading-relaxed"
+          className="bg-gradient-to-r from-purple-600 to-pink-600 shadow-2xl hover:shadow-lg backdrop-blur-md mx-auto mt-8 p-6 border border-transparent rounded-2xl max-w-2xl text-center text-lg text-white leading-relaxed transition-shadow duration-300"
           initial={{ scale: 0.9 }}
           animate={{ scale: 1 }}
           transition={{ duration: 0.5 }}
@@ -91,42 +92,44 @@ export function PricingTable() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
             >
-              <CardHeader className="bg-gradient-to-r from-purple-800/50 to-indigo-800/50 p-8">
-                <CardTitle className="font-black text-3xl">
+              <CardHeader className="bg-gradient-to-r from-purple-900/70 to-indigo-900/70 shadow-lg p-10 rounded-lg transform transition-transform hover:scale-105 duration-500 ease-in-out">
+                <CardTitle className="font-extrabold text-4xl transition-all duration-300 ease-in-out">
                   {item.id === 1 ? (
                     <div className="flex justify-between items-center">
-                      <h3 className="bg-clip-text bg-gradient-to-r from-pink-500 to-violet-500 text-transparent">{item.cardTitle}</h3>
-                      <p className="bg-primary/20 px-4 py-2 rounded-full font-bold text-primary text-sm leading-5 animate-pulse">
+                      <h3 className="bg-clip-text bg-gradient-to-r from-pink-600 to-violet-600 text-transparent transform transition-transform hover:scale-125 motion-safe:animate-bounce duration-500 ease-in-out">
+                        {item.cardTitle}
+                      </h3>
+                      <p className="bg-gradient-to-r from-purple-800 via-blue-800 to-pink-900 shadow-lg hover:shadow-xl px-6 py-3 rounded-full font-bold text-sm text-white leading-6 transform transition-shadow motion-safe:animate-pulse duration-300 hover:scale-105">
                         Most popular
                       </p>
                     </div>
                   ) : (
-                    <span className="bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400 text-transparent">{item.cardTitle}</span>
+                    <span className="bg-clip-text bg-gradient-to-r from-blue-500 to-emerald-500 text-transparent transform transition-transform hover:scale-110 duration-300">{item.cardTitle}</span>
                   )}
                 </CardTitle>
-                <CardDescription className="mt-2 text-gray-300 text-lg">{item.cardDescription}</CardDescription>
+                <CardDescription className="mt-2 text-gray-200 text-lg transition-opacity duration-300 ease-in-out">{item.cardDescription}</CardDescription>
               </CardHeader>
-              <CardContent className="bg-gradient-to-b from-transparent to-white/5 p-8">
-                <p className="bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 mt-6 font-black text-6xl text-transparent tracking-tighter">
+              <CardContent className="bg-gradient-to-b from-transparent to-white/10 shadow-md p-10 rounded-lg transform transition-transform hover:scale-105 duration-500 ease-in-out">
+                <p className="bg-clip-text bg-gradient-to-r from-purple-500 to-pink-700 mt-6 font-extrabold text-7xl text-transparent tracking-tighter transform transition-transform hover:scale-110 duration-300">
                   {item.priceTitle}
                 </p>
 
                 <ul className="space-y-4 mt-10 text-base text-gray-300 leading-7">
                   {item.benefits.map((benefit, index) => (
-                    <li key={index} className="flex items-center gap-x-3 bg-white/10 backdrop-blur-sm p-3 rounded-lg">
-                      <Check className="text-emerald-400 size-6" />
+                    <li key={index} className="flex items-center gap-x-3 bg-white/20 backdrop-blur-md p-4 rounded-lg transform transition-transform hover:scale-105 duration-300">
+                      <Check className="text-emerald-500 size-6" />
                       <span className="font-medium text-gray-800 text-xl">{benefit}</span>
                     </li>
                   ))}
                 </ul>
               </CardContent>
-              <CardFooter className="bg-gradient-to-r from-purple-800/50 to-indigo-800/50 p-8">
+              <CardFooter className="bg-gradient-to-r from-purple-900/70 to-indigo-900/70 shadow-lg p-10 rounded-lg transform transition-transform hover:scale-105 duration-500 ease-in-out">
                 {item.id === 1 ? (
                   <form className="w-full" action={CreateSubscription}>
-                    <SubmitButton text="Get Started" className="bg-gradient-to-r from-pink-500 hover:from-pink-600 to-purple-500 hover:to-purple-600 shadow-lg mt-5 px-6 py-3 rounded-full w-full font-bold text-lg text-white transform hover:scale-105 transition-all duration-300" />
+                    <SubmitButton text="Get Started" className="bg-gradient-to-r from-pink-600 hover:from-pink-700 to-purple-600 hover:to-purple-700 shadow-xl mt-5 px-6 py-3 rounded-full w-full font-bold text-lg text-white transform hover:scale-110 transition-all duration-300" />
                   </form>
                 ) : (
-                  <Button variant="outline" className="border-2 border-gray-300 bg-transparent hover:bg-white/20 shadow-lg mt-5 px-6 py-3 rounded-full w-full font-bold text-gray-300 text-lg hover:text-white transform hover:scale-105 transition-all duration-300" asChild>
+                  <Button variant="outline" className="border-2 border-gray-400 bg-transparent hover:bg-white/30 shadow-xl mt-5 px-6 py-3 rounded-full w-full font-bold text-gray-300 text-lg hover:text-white transform hover:scale-110 transition-all duration-300" asChild>
                     <Link href="/dashboard">Try for free</Link>
                   </Button>
                 )}
