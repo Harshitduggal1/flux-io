@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -15,45 +15,41 @@ import GradualSpacing from "@/components/ui/gradual-spacing";
 
 export function Hero() {
   return (
-<>
-<div className="bg-gradient-to-r from-blue-900 via-purple-800 to-pink-800 opacity-80 w-full">
-      <div className="flex flex-col justify-between items-center px-6 w-full text-sm">
-        <div className="flex flex-row justify-between lg:justify-start items-center px-6 w-full text-sm">
-          <Link href="/" className="flex items-center gap-1 hover:scale-105 transition-transform duration-300 ease-in-out">
-            <Image src={Logo} className="animate-pulse size-10" alt="Logo" />
-
-            <h4 className="bg-clip-text bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 font-extrabold text-5xl text-transparent">
-              <span className="hover:text-primary transition-colors duration-300">FLUX.IO</span>
-            </h4>
-          </Link>
-          <div className="md:hidden">
-            <ThemeToggle />
+    <>
+      <div className="bg-gradient-to-r from-black to-gray-900 opacity-90 w-full">
+        <div className="flex flex-col justify-between items-center px-6 w-full text-sm">
+          <div className="flex flex-row justify-between lg:justify-start items-center px-6 w-full text-sm">
+            <Link href="/" className="flex items-center gap-1 hover:scale-105 transition-transform duration-300 ease-in-out">
+              <Image src={Logo} className="animate-pulse size-10" alt="Logo" />
+              <h4 className="bg-clip-text bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 font-extrabold text-5xl text-transparent">
+                <span className="hover:text-primary transition-colors duration-300">FLUX.IO</span>
+              </h4>
+            </Link>
+            <div className="md:hidden">
+              <ThemeToggle />
+            </div>
           </div>
-        </div>
-        
 
-        <nav className="md:flex md:justify-end md:space-x-4 hidden pr-6 w-full">
-          <ThemeToggle />
-          <LoginLink>
-            <Button variant="secondary" className="hover:bg-primary shadow-lg hover:text-white transform transition-all duration-300 ease-in-out hover:scale-105">Sign in</Button>
-          </LoginLink>
-          <RegisterLink>
-            <Button className="bg-gradient-to-r from-purple-600 hover:from-purple-700 to-pink-600 hover:to-pink-700 shadow-lg font-bold text-white transform transition-all duration-300 ease-in-out hover:scale-105">Sign up</Button>
-          </RegisterLink>
-        </nav>
+          <nav className="md:flex md:justify-end md:space-x-4 hidden pr-6 w-full">
+            <ThemeToggle />
+            <LoginLink>
+              <Button variant="secondary" className="hover:bg-primary shadow-lg hover:text-white transform transition-all duration-300 ease-in-out hover:scale-105">Sign in</Button>
+            </LoginLink>
+            <RegisterLink>
+              <Button className="bg-gradient-to-r from-purple-600 hover:from-purple-700 to-pink-600 hover:to-pink-700 shadow-lg font-bold text-white transform transition-all duration-300 ease-in-out hover:scale-105">Sign up</Button>
+            </RegisterLink>
+          </nav>
         </div>
-        </div>
-        
- 
-      
-      <section className="bg-transparent">
+      </div>
+
+      <section className="bg-transparent relative">
         <Particles
-        className="absolute inset-0"
-        quantity={100}
-        ease={80}
-        color="#ffffff"
-        refresh
-      />
+          className="absolute inset-0"
+          quantity={100}
+          ease={80}
+          color="#ffffff"
+          refresh
+        />
         <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,rgba(255,255,255,0),rgba(255,255,255,0.5))]"></div>
         <div className="relative z-10 items-center py-12 lg:py-20 w-full">
           <div className="px-4 w-full text-center">
@@ -62,19 +58,17 @@ export function Hero() {
             </span>
 
             <GradualSpacing
-      className="font-bold font-display text-8xl text-blue-500 md:leading-[5rem] -tracking-widest"
-      text="BLOGGING SOFTWARE
-      "
-    />
-    <GradualSpacing
-      className="font-bold font-display text-8xl text-purple-500 md:leading-[5rem] -tracking-widest"
-      text="
-      FOR PROFESSIONALS"
-    />
+              className="font-bold font-display text-8xl text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-pink-600 md:leading-[5rem] -tracking-widest"
+              text="BLOGGING SOFTWARE"
+            />
+            <GradualSpacing
+              className="font-bold font-display text-8xl text-transparent bg-clip-text bg-gradient-to-r from-pink-600 via-purple-600 to-indigo-600 md:leading-[5rem] -tracking-widest"
+              text="FOR PROFESSIONALS"
+            />
 
             <p className="bg-gradient-to-r from-blue-500 to-purple-600 shadow-2xl backdrop-blur-sm mx-auto mt-4 p-6 rounded-xl max-w-xl font-light text-base text-white lg:text-lg tracking-tighter">
-              Setting up your blog is hard and time consuming. We make it easy
-              for you to create a blog in minutes
+              Setting up your blog is hard and time-consuming. We make it easy
+              for you to create a blog in minutes.
             </p>
             <div className="flex justify-center items-center gap-x-5 mt-8 w-full">
               <LoginLink>
