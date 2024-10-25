@@ -26,9 +26,11 @@ const features = [
     icon: Smile,
   },
 ];
+//improved gradients
+
 export function Features() {
   return (
-    <div className="bg-transparent py-24 sm:py-32">
+    <div className="bg-black py-24 sm:py-32">
       <div className="mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl lg:text-center">
         <p className="bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 font-extrabold text-lg text-transparent">
           Revolutionize Your Blogging
@@ -36,7 +38,7 @@ export function Features() {
         <h1 className="bg-clip-text bg-gradient-to-r from-emerald-300 via-blue-500 to-purple-600 mt-4 font-black text-4xl text-transparent sm:text-6xl tracking-tight">
           Unleash the Power of AI-Driven Blogging
         </h1>
-        <p className="bg-white/10 shadow-2xl backdrop-blur-sm mt-6 p-6 rounded-xl text-gray-900 text-lg leading-8">
+        <p className="bg-white/10 shadow-2xl backdrop-blur-sm mt-6 p-6 rounded-xl text-gray-300 text-lg leading-8">
           Welcome to the future of content creation. Our trillion-dollar blogging platform
           harnesses cutting-edge AI technology to supercharge your writing and skyrocket
           your SEO rankings. Dominate the digital landscape with unparalleled ease and efficiency.
@@ -46,14 +48,17 @@ export function Features() {
       <div className="mx-auto mt-20 px-6 lg:px-8 max-w-7xl">
         <div className="gap-x-8 gap-y-16 lg:gap-24 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2">
           {features.map((feature) => (
-            <div key={feature.name} className="relative bg-white/5 shadow-[0_8px_30px_rgb(0,0,0,0.12)] hover:shadow-[0_8px_30px_rgba(14,165,233,0.3)] backdrop-blur-md p-10 rounded-2xl transition-all hover:-translate-y-1 duration-300">
-              <div className="mb-4 font-bold text-gray-900 text-xl leading-7">
+            <div
+              key={feature.name}
+              className="relative bg-white/10 shadow-lg hover:shadow-2xl backdrop-blur-md p-10 rounded-2xl transition-all duration-300 transform hover:-translate-y-1"
+            >
+              <div className="mb-4 font-bold text-gray-300 text-xl leading-7">
                 <div className="top-5 left-5 absolute flex justify-center items-center bg-gradient-to-r from-cyan-500 to-blue-500 shadow-lg rounded-full w-16 h-16">
-                  <feature.icon className="w-8 h-8 text-gray-900" />
+                  <feature.icon className="w-8 h-8 text-white" />
                 </div>
-                <span className="ml-20">{feature.name}</span>
+                <span className="ml-20 text-white">{feature.name}</span>
               </div>
-              <p className="mt-2 ml-20 text-base text-gray-900 leading-7">
+              <p className="mt-2 ml-20 text-base text-gray-300 leading-7">
                 {feature.description}
               </p>
             </div>
